@@ -1,6 +1,8 @@
 
 
 #GENERAL SERVICE INFO
+#
+#
 service: DAT250-Auction
 provider:
   name: aws
@@ -88,11 +90,11 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "uuid"
+            AttributeName: "auction_id"
             AttributeType: "S"
         KeySchema:
           -
-            AttributeName: "uuid"
+            AttributeName: "auction_id"
             KeyType: "HASH"
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -106,11 +108,11 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: "uuid"
+            AttributeName: "seller_id"
             AttributeType: "S"
         KeySchema:
           -
-            AttributeName: "uuid"
+            AttributeName: "seller_id"
             KeyType: "HASH"
         ProvisionedThroughput:
           ReadCapacityUnits: 1

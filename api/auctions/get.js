@@ -10,12 +10,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.get = (event, context, callback) => {
     let params = {
-        TableName: process.env.AUCTIONS_TABLE,
-        ProjectionExpression: "uuid, product_name, description, unix_end_time, created_at, category, image, seller_id, bids"
+        TableName: process.env.AUCTION_TABLE,
+        ProjectionExpression: "auction_id, product_name, description, unix_end_time, created_at, category, image, seller_id, bids"
     };
 
     console.log('Getting the stuff');
-    const onScan = (err, data) =>{
+    const onScan = (err, data) => {
         if (err) {
             console.log('Bad stuff: ', JSON.stringify(err, null, 2));
             callback(err);

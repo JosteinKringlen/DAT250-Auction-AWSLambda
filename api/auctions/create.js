@@ -34,7 +34,7 @@ module.exports.create = (event, context, callback) => {
                 statusCode: 200,
                 body: JSON.stringify({
                     message: 'Auction created successfully',
-                    uuid: res.uuid
+                    auction_id: res.auction_id
                 })
             });
         })
@@ -61,17 +61,18 @@ const submitAuction = auction => {
 const auctionParams = (product_name, min_price, description, category, image, duration_days, seller_id) => {
     const now = new Date();
     const timestamp = now.getTime();
-    const unix_end_time = now.setDate(now.getDate() + duration_days)
+    const unix_end_time = now.setDate(now.getDate() + duration_days);
     return {
-        uuid: uuid.v1(),
+        auction_id: uuid.v1(),
         product_name: product_name,
         min_price: min_price,
         description: description,
-        createdAt: timestamp,
-        updatedAt: timestamp,
+        created_at: timestamp,
+        updated_at: timestamp,
         bids: [],
         category: category,
         image: image,
         seller_id: seller_id,
+        unix_end_time: unix_end_time
     }
 };

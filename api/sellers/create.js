@@ -16,8 +16,8 @@ module.exports.create = (event, context, callback) => {
     const phonenumber = bodyData.seller_phone;
 
 
-    if(typeof name !== 'string' || typeof title !== 'string' || typeof description !== 'string'
-        || typeof startingPrice !== 'number'){
+    if(typeof name !== 'string' || typeof email !== 'string' || typeof address !== 'string'
+        || typeof phonenumber !== 'number'){
         console.error('Bad stuff');
         callback(null, {
             statusCode: 400,
@@ -61,7 +61,7 @@ const sellerParams = (name, email, address, phonenumber) => {
     const timestamp = new Date().getTime();
 
     return {
-        uuid: uuid.v1(),
+        seller_id: uuid.v1(),
         name: name,
         email: email,
         address: address,
