@@ -1,31 +1,15 @@
-# Welcome to Serverless!
-#
-# This file is the main config file for your service.
-# It's very minimal at this point and uses default values.
-# You can always add more config options for more control.
-# We've included some commented out config examples here.
-# Just uncomment any of them to get that config option.
-#
-# For full config options, check the docs:
-#    docs.serverless.com
-#
-# Happy Coding!
 
-service: DAT250-Auction # NOTE: update this with your service name
 
-# You can pin your service to only deploy with a specific Serverless version
-# Check out our docs for more details
-# frameworkVersion: "=X.X.X"
-
-plugins:
-  - serverless-offline
-
+#GENERAL SERVICE INFO
+service: DAT250-Auction
 provider:
   name: aws
   runtime: nodejs6.10
+  stage: dev
+  region: eu-west-2
   environment:
-    CANDIDATE_TABLE: ""
-    STUFF_TABLE: "STUFF"
+    AUCTION_TABLE: "${opt:stage, self:provider.stage}-Auctions"
+    SELLER_TABLE: "${opt:stage, self:provider.stage}-Sellers"
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -36,177 +20,105 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "*"
-resources:
-  Resources:
-    CandidatesDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: "id"
-            AttributeType: "S"
-        KeySchema:
-          -
-            AttributeName: "id"
-            KeyType: "HASH"
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        StreamSpecification:
-          StreamViewType: "NEW_AND_OLD_IMAGES"
-        TableName: "${self:provider.environment.CANDIDATE_TABLE}"
-    TestTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: "id"
-            AttributeType: "S"
-        KeySchema:
-          -
-            AttributeName: "id"
-            KeyType: "HASH"
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        StreamSpecification:
-          StreamViewType: "NEW_AND_OLD_IMAGES"
-        TableName: "${self:provider.environment.STUFF_TABLE}"
 
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
-
-# you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:PutObject"
-#      Resource:
-#        Fn::Join:
-#          - ""
-#          - - "arn:aws:s3:::"
-#            - "Ref" : "ServerlessDeploymentBucket"
-#            - "/*"
-
-# you can define service wide environment variables here
-#  environment:
-#    variable1: value1
-
-# you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
-
+# LAMBDA FUNCTIONS
 functions:
   createAuction:
     handler: api/auctions/create.create
     memorySize: 128
     events:
       - http:
-          path: /createAuction
+          path: createAuction
           method: post
   getAuction:
     handler: api/auctions/get.get
     events:
       - http:
-          path: /getAuction
+          path: getAuction
           method: get
   bidOnAuction:
     handler: api/auctions/bid.bid
     events:
       - http:
-          path: /postBid
+          path: postBid
           method: post
   updateAuction:
     handler: api/auctions/update.update
     events:
       - http:
-          path: /updateEvent
+          path: updateEvent
           method: post
-
   createSeller:
     handler: api/sellers/create.create
     events:
       - http:
-          path: /createSeller
+          path: createSeller
           method: post
   getSeller:
     handler: api/sellers/get.get
     events:
       - http:
-          path: /getSeller
+          path: getSeller
           method: get
   getSellerBids:
     handler: api/sellers/bids.bids
     events:
       - http:
-          path: /getBids
+          path: getBids
           method: get
   editSeller:
     handler: api/sellers/edit.edit
     events:
       - http:
-          path: /editSeller
+          path: editSeller
           method: post
   deleteSeller:
     handler: api/sellers/delete.delete
     events:
       - http:
-          path: /deleteSeller
+          path: deleteSeller
           method: delete
 
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
-#    events:
-#      - http:
-#          path: users/create
-#          method: get
-#      - s3: ${env:BUCKET}
-#      - schedule: rate(10 minutes)
-#      - sns: greeter-topic
-#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
-#      - alexaSkill
-#      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
-#      - iot:
-#          sql: "SELECT * FROM 'some_topic'"
-#      - cloudwatchEvent:
-#          event:
-#            source:
-#              - "aws.ec2"
-#            detail-type:
-#              - "EC2 Instance State-change Notification"
-#            detail:
-#              state:
-#                - pending
-#      - cloudwatchLog: '/aws/lambda/hello'
-#      - cognitoUserPool:
-#          pool: MyUserPool
-#          trigger: PreSignUp
+# RESROUCES
+resources:
+  Resources:
+    AuctionsDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: "NEW_AND_OLD_IMAGES"
+        TableName: "${self:provider.environment.AUCTION_TABLE}"
+    SellersDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: "id"
+            AttributeType: "S"
+        KeySchema:
+          -
+            AttributeName: "id"
+            KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: "NEW_AND_OLD_IMAGES"
+        TableName: "${self:provider.environment.SELLER_TABLE}"
 
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
-
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
+# EXTRA PLUGINS
+plugins:
+  - serverless-offline

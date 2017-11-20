@@ -1,8 +1,9 @@
 'use strict';
 
-import AWS from 'aws-sdk';
-import uuid from 'uuid';
+const uuid = require('uuid');
+const AWS = require('aws-sdk');
 
+AWS.config.update({ region: "eu-west-2" });
 AWS.config.setPromisesDependency(require('bluebird'));
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
