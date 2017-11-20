@@ -66,4 +66,4 @@ const auctionParams = (title, description, startingPrice, user_id) => {
         createdAt: timestamp,
         updatedAt: timestamp,
     }
-}
+};
