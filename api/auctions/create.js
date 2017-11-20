@@ -10,28 +10,31 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
     const bodyData = JSON.parse(event.body);
-    const user_id = bodyData.user_id;
-    const title = bodyData.title;
-    const description= bodyData.description;
-    const startingPrice = bodyData.startingPrice;
+    const seller_id = bodyData.seller_id;
+    const product_name = bodyData.product_name;
+    const min_price = bodyData.min_price;
+    const description = bodyData.description;
+    const category = bodyData.category;
+    const image = bodyData.image;
+    const duration_days = bodyData.duration_days;
 
-    if(typeof user_id !== 'string' || typeof title !== 'string' || typeof description !== 'string'
-    || typeof startingPrice !== 'number'){
-        console.error('Bad stuff');
+    if(typeof seller_id !== 'string' || typeof product_name !== 'string'
+    || typeof description !== 'string'|| typeof min_price !== 'number'
+    || typeof category !== 'string' || typeof image !== 'string'
+    || typeof duration_days !== 'number'){
         callback(null, {
             statusCode: 400,
-            headers: {'Content-Type': 'text/plain'},
-            body: 'Bad stuff happened. Sry',
+            body: 'Bad request. Invalid value for one of the inputs',
         });
     }
 
-    submitAuction(auctionParams(title, description, startingPrice, user_id))
+    submitAuction(auctionParams(product_name, min_price, description, category, image, duration_days, seller_id))
         .then(res => {
             callback(null, {
                 statusCode: 200,
                 body: JSON.stringify({
-                    message: 'Good stuff',
-                    title: res.title
+                    message: 'Auction created successfully',
+                    uuid: res.uuid
                 })
             });
         })
@@ -40,31 +43,35 @@ module.exports.create = (event, context, callback) => {
            callback(null, {
                statusCode: 500,
                body: JSON.stringify({
-                   message: 'Bad stuff when creating auction'
+                   message: 'Error when creating auction',
+                   error: err
                })
            })
         });
 };
 
 const submitAuction = auction => {
-    console.log('Submitting auction');
     const auctionInfo = {
         TableName: process.env.AUCTION_TABLE,
         Item: auction,
     };
-    return dynamoDb.put(auctionInfo).promise()
-        .then(res => auction);
+    return dynamoDb.put(auctionInfo).promise().then(res => auction);
 };
 
-const auctionParams = (title, description, startingPrice, user_id) => {
-    const timestamp = new Date().getTime();
+const auctionParams = (product_name, min_price, description, category, image, duration_days, seller_id) => {
+    const now = new Date();
+    const timestamp = now.getTime();
+    const unix_end_time = now.setDate(now.getDate() + duration_days)
     return {
-        id: uuid.v1(),
-        user_id: user_id,
-        title: title,
+        uuid: uuid.v1(),
+        product_name: product_name,
+        min_price: min_price,
         description: description,
-        startingPrice: startingPrice,
         createdAt: timestamp,
         updatedAt: timestamp,
+        bids: [],
+        category: category,
+        image: image,
+        seller_id: seller_id,
     }
 };
