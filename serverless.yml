@@ -107,19 +107,62 @@ resources:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /
-          method: get
-  submit:
-    handler: api/candidate.submit
+  createAuction:
+    handler: api/auction.create
     memorySize: 128
     events:
       - http:
-          path: /candidates
+          path: /createAuction
           method: post
+  getAuction:
+    handler: api/auction.get
+    events:
+      - http:
+          path: /getAuction
+          method: get
+  bidOnAuction:
+    handler: api/auction.bid
+    events:
+      - http:
+          path: /postBid
+          method: post
+  updateAuction:
+    handler: api/auction.update
+    events:
+      - http:
+          path: /updateEvent
+          method: post
+
+  createSeller:
+    handler: api/seller.create
+    events:
+      - http:
+          path: /createSeller
+          method: post
+  getSeller:
+    handler: api/seller.get
+    events:
+      - http:
+          path: /getSeller
+          method: get
+  getSellerBids:
+    handler: api/seller.bids
+    events:
+      - http:
+          path: /getBids
+          method: get
+  editSeller:
+    handler: api/seller.edit
+    events:
+      - http:
+          path: /editSeller
+          method: post
+  deleteSeller:
+    handler: api/seller.delete
+    events:
+      - http:
+          path: /deleteSeller
+          method: delete
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
