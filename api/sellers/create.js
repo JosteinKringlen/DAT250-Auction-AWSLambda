@@ -10,14 +10,14 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
     const bodyData = JSON.parse(event.body);
-    const name = bodyData.seller_name;
-    const email = bodyData.seller_email;
-    const address = bodyData.seller_adress;
-    const phonenumber = bodyData.seller_phone;
+    const seller_name = bodyData.seller_name;
+    const seller_email = bodyData.seller_email;
+    const seller_address = bodyData.seller_address;
+    const seller_phone = bodyData.seller_phone;
 
 
-    if(typeof name !== 'string' || typeof email !== 'string' || typeof address !== 'string'
-        || typeof phonenumber !== 'number'){
+    if(typeof seller_name !== 'string' || typeof seller_email !== 'string' || typeof seller_address !== 'string'
+        || typeof seller_phone !== 'number'){
         console.error('Bad stuff');
         callback(null, {
             statusCode: 400,
@@ -26,7 +26,7 @@ module.exports.create = (event, context, callback) => {
         });
     }
 
-    submitSeller(sellerParams(name, email, address, phonenumber))
+    submitSeller(sellerParams(seller_name, seller_email, seller_address, seller_phone))
         .then(res => {
             callback(null, {
                 statusCode: 200,
@@ -57,15 +57,15 @@ const submitSeller = seller => {
         .then(res => seller);
 };
 
-const sellerParams = (name, email, address, phonenumber) => {
+const sellerParams = (seller_name, seller_email, seller_address, seller_phone) => {
     const timestamp = new Date().getTime();
 
     return {
         seller_id: uuid.v1(),
-        name: name,
-        email: email,
-        address: address,
-        phonenumber: phonenumber,
+        seller_name: seller_name,
+        seller_email: seller_email,
+        seller_address: seller_address,
+        seller_phone: seller_phone,
         createdAt: timestamp,
         updatedAt: timestamp
     }
