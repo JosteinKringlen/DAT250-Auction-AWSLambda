@@ -33,6 +33,8 @@ provider:
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
       Resource: "*"
 resources:
   Resources:
@@ -108,57 +110,57 @@ resources:
 
 functions:
   createAuction:
-    handler: api/auction.create
+    handler: api/auctions/create.create
     memorySize: 128
     events:
       - http:
           path: /createAuction
           method: post
   getAuction:
-    handler: api/auction.get
+    handler: api/auctions/get.get
     events:
       - http:
           path: /getAuction
           method: get
   bidOnAuction:
-    handler: api/auction.bid
+    handler: api/auctions/bid.bid
     events:
       - http:
           path: /postBid
           method: post
   updateAuction:
-    handler: api/auction.update
+    handler: api/auctions/update.update
     events:
       - http:
           path: /updateEvent
           method: post
 
   createSeller:
-    handler: api/seller.create
+    handler: api/sellers/create.create
     events:
       - http:
           path: /createSeller
           method: post
   getSeller:
-    handler: api/seller.get
+    handler: api/sellers/get.get
     events:
       - http:
           path: /getSeller
           method: get
   getSellerBids:
-    handler: api/seller.bids
+    handler: api/sellers/bids.bids
     events:
       - http:
           path: /getBids
           method: get
   editSeller:
-    handler: api/seller.edit
+    handler: api/sellers/edit.edit
     events:
       - http:
           path: /editSeller
           method: post
   deleteSeller:
-    handler: api/seller.delete
+    handler: api/sellers/delete.delete
     events:
       - http:
           path: /deleteSeller

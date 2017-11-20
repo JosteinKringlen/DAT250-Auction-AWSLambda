@@ -9,20 +9,5 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.create = (event, context, callback) => {
 
-};
-
-module.exports.get = (event, context, callback) => {
-
 
 };
-
-module.exports.bid = (event, context, callback) => {
-
-
-};
-
-module.exports.update = (event, context, callback) => {
-
-
-};
-
