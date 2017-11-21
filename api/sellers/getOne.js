@@ -17,9 +17,13 @@ module.exports.get = (event, context, callback) => {
     };
 
     dynamoDb.get(params).promise().then(res => {
+        let bodyRes = {};
+        if (res.Item !== null){
+            bodyRes = res.Item;
+        }
         const result = {
             statusCode: 200,
-            body: JSON.stringify(res.Item),
+            body: JSON.stringify(bodyRes),
             headers: {
                 "Access-Control-Allow-Origin" : "*"
             },

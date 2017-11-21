@@ -15,8 +15,8 @@ module.exports.bid = (event, context, callback) => {
 
     const timestamp = new Date().getTime();
 
-    if(typeof newBid !== 'number' || typeof bidder_id !== 'string'){
-        callback(null, {
+    if(typeof newBid !== 'string' || typeof bidder_id !== 'string'){
+        return callback(null, {
             statusCode: 400,
             body: 'Bad request. Invalid value for one of the inputs',
         });
@@ -39,7 +39,7 @@ module.exports.bid = (event, context, callback) => {
         ReturnValues:"ALL_NEW"
     };
 
-   dynamoDb.update(params).promise().then(res => {
+    dynamoDb.update(params).promise().then(res => {
         const result = {
             statusCode: 200,
             headers: {
@@ -52,4 +52,5 @@ module.exports.bid = (event, context, callback) => {
         console.error(err);
         callback(new Error('Could not fetch auction.'));
     });
+
 };

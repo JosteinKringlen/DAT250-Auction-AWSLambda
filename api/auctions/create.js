@@ -16,13 +16,13 @@ module.exports.create = (event, context, callback) => {
     const description = bodyData.description;
     const category = bodyData.category;
     const image = bodyData.image;
-    const duration_days = bodyData.duration_days;
+    const duration_days = parseInt(bodyData.duration_days);
 
     if(typeof seller_id !== 'string' || typeof product_name !== 'string'
     || typeof description !== 'string'|| typeof min_price !== 'string'
     || typeof category !== 'string' || typeof image !== 'string'
-    || typeof duration_days !== 'string'){
-        callback(null, {
+    /*|| typeof duration_days !== 'string'*/){
+        return callback(null, {
             statusCode: 400,
             body: 'Bad request. Invalid value for one of the inputs',
         });
