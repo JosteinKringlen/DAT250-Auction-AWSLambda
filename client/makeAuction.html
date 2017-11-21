@@ -10,7 +10,9 @@
 <body>
 <div class='header'>
     <div class="logo">
-        <img src="resources/logo.png">
+        <a href="index.html">
+            <img src="resources/logo.png">
+        </a>
     </div>
     <div class="button">
         <form action="makeUser.html">
@@ -28,9 +30,6 @@
                 <p>Name:</p><input class="userInput" name="auction_name">
             </div>
             <div class="input">
-                <p>Seller:</p><input class="userInput" name="auction_seller">
-            </div >
-            <div class="input">
                 <p>Price:</p><input class="userInput" name="auction_price">
             </div>
             <div class="input">
@@ -42,7 +41,7 @@
             <div class="input">
                 <p>Duration in days:</p><input class="userInput" name="auction_duration">
             </div>
-            <input type="button" class="buttons" value="Post auction" onclick="makeUser(this.form.auction_name.value,this.form.auction_seller.value,this.form.auction_price.value,this.form.auction_description.value,this.form.auction_category.value,this.form.auction_duration.value)">
+            <input type="button" class="buttons" value="Post auction" onclick="makeAuction(this.form.auction_name.value,this.form.auction_price.value,this.form.auction_description.value,this.form.auction_category.value,this.form.auction_duration.value)">
         </form>
     </div>
 </div>

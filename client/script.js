@@ -82,12 +82,58 @@ function createListElements() {
 
 function makeUser(name,address,email,phone) {
 
-    console.log(name + address + email + phone);
+    const url = "https://q0jzfqkffi.execute-api.eu-west-2.amazonaws.com/dev/createSeller";
+
+    let data = {
+        seller_name:name,
+        seller_email:email,
+        seller_address:address,
+        seller_phone:phone
+    };
+
+    let fetchData = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url,fetchData)
+        .then(res => {
+            console.log(res);
+        })
 
 }
 
-function makeAuction(name, seller, price, description, category, duration){
+function makeAuction(name, price, description, category, duration){
 
-    console.log(name + seller + price + description, category, duration);
+    const url = "https://q0jzfqkffi.execute-api.eu-west-2.amazonaws.com/dev/createAuction";
+
+    let data = {
+        seller_id:'d2235910-ced4-11e7-882f-75e15f1a770d',
+        product_name:name,
+        min_price:price,
+        description:description,
+        category:category,
+        image:'https://i.imgur.com/p3fWg61.png',
+        duration_days:duration
+
+    };
+
+    let fetchData = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    };
+
+    fetch(url,fetchData)
+        .then(res => {
+            console.log(res)
+        })
+
+
 
 }

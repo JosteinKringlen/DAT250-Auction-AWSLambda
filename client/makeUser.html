@@ -10,7 +10,9 @@
 <body>
     <div class='header'>
         <div class="logo">
-            <img src="resources/logo.png">
+            <a href="index.html">
+                <img src="resources/logo.png">
+            </a>
         </div>
         <div class="button">
             <form action="makeUser.html">
@@ -34,9 +36,9 @@
                     <p>Email:</p><input class="userInput" name="user_email">
                 </div>
                 <div class="input">
-                    <p>Phone number:</p><input class="userInput" name="user_phone">
+                    <p>Phone number:</p><input type="number" class="userInput" name="user_phone">
                 </div>
-                <input type="button" class="buttons" value="Make user" onclick="makeAuction(this.form.user_name.value,this.form.user_address.value,this.form.user_email.value,this.form.user_phone.value)">
+                <input type="button" class="buttons" value="Make user" onclick="makeUser(this.form.user_name.value,this.form.user_address.value,this.form.user_email.value,this.form.user_phone.value)">
             </form>
         </div>
     </div>
