@@ -52,6 +52,7 @@ function createProductInfoDiv(auction) {
 function createViewAuctionButton(auction) {
   var button = createNode('button', 'view-auction-button');
   button.innerHTML = "View auction";
+  button.onclick = function() { window.location.href = "singleView.html?id=" + auction.auction_id }
   return button;
 }
 
