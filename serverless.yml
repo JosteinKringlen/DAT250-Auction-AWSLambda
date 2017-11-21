@@ -87,8 +87,9 @@ functions:
     handler: api/sellers/delete.delete
     events:
       - http:
-          path: deleteSeller
+          path: deleteSeller/{seller_id}
           method: delete
+          cors: true
   getSingleSeller:
     handler: api/sellers/getOne.get
     events:
