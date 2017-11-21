@@ -27,9 +27,9 @@ module.exports.bids = (event, context, callback) => {
         } else {
             auctions = data.Items;
             auctions.forEach(function (item) {
-                if (item.bids.length >=1 ){
-                    for (let i = 0; i < item.bids.length; i++){
-                        if (item.bids[i].bidder_id === _seller_id){
+                if (item.bids.length >= 1) {
+                    for (let i = 0; i < item.bids.length; i++) {
+                        if (item.bids[i].bidder_id === _seller_id) {
                             sellerAuctions.push({
                                 auction_id: item.auction_id,
                                 seller_bid: item.bids[i].newBid
@@ -39,11 +39,12 @@ module.exports.bids = (event, context, callback) => {
                 }
             });
             sellerAuctions.forEach(function (item) {
-               console.log(item);
+                console.log(item);
             });
             return callback(null, {
-               statusCode: 200,
-               body: sellerAuctions
+                statusCode: 200,
+                body: sellerAuctions,
+                headers: {"Access-Control-Allow-Origin" : "*"}
             })
         }
     };
