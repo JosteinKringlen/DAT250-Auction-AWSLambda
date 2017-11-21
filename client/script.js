@@ -79,3 +79,9 @@ function createListElements() {
       console.log(err)
     });
 }
+
+function makeUser(name,address,email,phone) {
+
+    console.log(name + address + email + phone);
+
+}
