@@ -75,7 +75,7 @@ functions:
     handler: api/sellers/bids.bids
     events:
       - http:
-          path: getBids
+          path: getBids/{seller_id}
           method: get
   editSeller:
     handler: api/sellers/edit.edit
