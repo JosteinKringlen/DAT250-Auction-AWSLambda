@@ -75,7 +75,7 @@ function createListElements() {
       })
     })
     .catch(function(err) {
-      alert("Something crashed...")
+      alert("Something crashed...");
       console.log(err)
     });
 }
@@ -102,7 +102,9 @@ function makeUser(name,address,email,phone) {
     fetch(url,fetchData)
         .then(res => {
             console.log(res);
-        })
+        });
+
+    alert('User added');
 
 }
 
@@ -132,8 +134,8 @@ function makeAuction(name, price, description, category, duration){
     fetch(url,fetchData)
         .then(res => {
             console.log(res)
-        })
+        });
 
-
+    alert('Auction added');
 
 }
