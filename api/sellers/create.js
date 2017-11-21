@@ -17,7 +17,7 @@ module.exports.create = (event, context, callback) => {
 
 
     if(typeof seller_name !== 'string' || typeof seller_email !== 'string' || typeof seller_address !== 'string'
-        || typeof seller_phone !== 'number'){
+        || typeof seller_phone !== 'string' ){
         console.error('Bad stuff');
         callback(null, {
             statusCode: 400,

@@ -33,12 +33,14 @@ functions:
       - http:
           path: createAuction
           method: post
+          cors: true
   getAuction:
     handler: api/auctions/get.get
     events:
       - http:
           path: getAuction
           method: get
+          cors: true
   bidOnAuction:
     handler: api/auctions/bid.bid
     events:
@@ -52,12 +54,14 @@ functions:
       - http:
           path: updateEvent
           method: post
+          cors: true
   getSingleAuction:
     handler: api/auctions/getOne.get
     events:
       - http:
           path: getSingleAuction/{auction_id}
           method: get
+          cors: true
   #Seller
   createSeller:
     handler: api/sellers/create.create
@@ -65,18 +69,21 @@ functions:
       - http:
           path: createSeller
           method: post
+          cors: true
   getSeller:
     handler: api/sellers/get.get
     events:
       - http:
           path: getSeller
           method: get
+          cors: true
   getSellerBids:
     handler: api/sellers/bids.bids
     events:
       - http:
           path: getBids/{seller_id}
           method: get
+          cors: true
   editSeller:
     handler: api/sellers/edit.edit
     events:
@@ -97,6 +104,7 @@ functions:
       - http:
           path: getSingleSeller/{seller_id}
           method: get
+          cors: true
 # RESROUCES
 resources:
   Resources:

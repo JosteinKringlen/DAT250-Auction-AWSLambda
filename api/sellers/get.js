@@ -25,7 +25,10 @@ module.exports.get = (event, context, callback) => {
                 statusCode: 200,
                 body: JSON.stringify({
                     sellers: data.Items
-                })
+                }),
+                headers: {
+                    "Access-Control-Allow-Origin" : "*"
+                },
             })
         }
     };
