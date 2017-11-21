@@ -10,10 +10,12 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.bid = (event, context, callback) => {
     const bodyData = JSON.parse(event.body);
+    const newBid = bodyData.new_bid;
+    const bidder_id = bodyData.bidder_id;
 
     const timestamp = new Date().getTime();
 
-    if(typeof bodyData.new_bid !== 'number'){
+    if(typeof newBid !== 'number' || typeof bidder_id !== 'string'){
         callback(null, {
             statusCode: 400,
             body: 'Bad request. Invalid value for one of the inputs',
@@ -22,24 +24,31 @@ module.exports.bid = (event, context, callback) => {
 
     const params = {
         TableName: process.env.AUCTION_TABLE,
-        Item: {
+        Key: {
             auction_id: event.pathParameters.auction_id,
-            bids: bodyData.new_bid,
-            updated_at: timestamp,
-        }
+        },
+        UpdateExpression: "set #bids = list_append(if_not_exists(#bids, :empty_list), :biddings), updated_at = :ua",
+        ExpressionAttributeNames: {
+            "#bids": "bids",
+        },
+        ExpressionAttributeValues: {
+            ":biddings": [{newBid, bidder_id}],
+            ":empty_list": [],
+            ":ua": timestamp
+        },
+        ReturnValues:"ALL_NEW"
     };
 
-    dynamoDb.update(params).promise().then(res => {
-        const result = {
-            statusCode: 200,
-            body: JSON.stringify(res.Item),
-        };
-        callback(null, result);
-    }).catch(err => {
-        console.error(err);
-        callback(new Error('Bad stuff'));
-    })
-   /* dynamoDb.update(params).promise().then(res => {
+
+    /*dynamoDb.update(params, function (err, data) {
+        if(err){
+            console.error("BAD, BAD STUFF:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("GOOD STUFF, MAN:", JSON.stringify(data, null, 2));
+        }
+    })*/
+
+   dynamoDb.update(params).promise().then(res => {
         const result = {
             statusCode: 200,
             body: JSON.stringify(res.Item),
@@ -48,5 +57,5 @@ module.exports.bid = (event, context, callback) => {
     }).catch(err => {
         console.error(err);
         callback(new Error('Could not fetch auction.'));
-    });*/
+    });
 };

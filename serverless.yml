@@ -44,7 +44,7 @@ functions:
     events:
       - http:
           path: postBid/{auction_id}
-          method: put
+          method: post
           cors: true
   updateAuction:
     handler: api/auctions/update.update
