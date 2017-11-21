@@ -11,7 +11,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 module.exports.get = (event, context, callback) => {
     let params = {
         TableName: process.env.AUCTION_TABLE,
-        ProjectionExpression: "auction_id, product_name, description, unix_end_time, created_at, category, image, seller_id, bids"
+        ProjectionExpression: "auction_id, product_name, description, unix_end_time, created_at, category, image, seller_id, bids, min_price"
     };
 
     console.log('Getting the stuff');
