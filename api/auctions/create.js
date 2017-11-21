@@ -32,6 +32,9 @@ module.exports.create = (event, context, callback) => {
         .then(res => {
             callback(null, {
                 statusCode: 200,
+                headers: {
+                    "Access-Control-Allow-Origin" : "*"
+                },
                 body: JSON.stringify({
                     message: 'Auction created successfully',
                     auction_id: res.auction_id
