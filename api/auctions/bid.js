@@ -39,15 +39,6 @@ module.exports.bid = (event, context, callback) => {
         ReturnValues:"ALL_NEW"
     };
 
-
-    /*dynamoDb.update(params, function (err, data) {
-        if(err){
-            console.error("BAD, BAD STUFF:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("GOOD STUFF, MAN:", JSON.stringify(data, null, 2));
-        }
-    })*/
-
    dynamoDb.update(params).promise().then(res => {
         const result = {
             statusCode: 200,
