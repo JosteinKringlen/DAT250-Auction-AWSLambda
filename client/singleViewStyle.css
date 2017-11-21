@@ -1,0 +1,170 @@
+@import 'header.css';
+
+body {
+    background-color: #ededed;
+}
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.container {
+  width: 75%;
+  height: 800px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
+}
+
+.outer-info-container {
+  width: 65%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-top: 50px;
+  padding-left: 20px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.name-label {
+  font-size: 30px;
+  margin: 0;
+  margin-top: 20px;
+}
+
+.description-label {
+  font-size: 24px;
+  margin: 0;
+  color: #636363;
+}
+
+.bidding-label {
+  font-size: 35px;
+  margin: 0;
+  color: #636363;
+}
+
+.time-remaining-label {
+  color: #636363;
+}
+
+.category-label {
+  margin: 0;
+  margin-top: 5px;
+  color: darkGray;
+  font-size: 20px;
+}
+
+.current-bid-header {
+  font-size: 20px;
+  color: black;
+  margin: 0;
+  margin-top: 30px;
+}
+
+.description-header {
+  font-size: 20px;
+  color: black;
+  margin: 0;
+  margin-top: 30px;
+}
+
+.sidebar-container {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.seller-info-container {
+  width: 100%;
+  background-color: white;
+  height: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.seller-image {
+  height: 180px;
+  width: 180px;
+}
+
+.seller-name-label {
+  font-size: 20px;
+  margin: 0;
+  margin-top: 30px;
+}
+
+.seller-phone-label {
+  font-size: 20px;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.seller-email-label {
+  font-size: 20px;
+  margin:0;
+  margin-top: 10px;
+}
+
+.bidding-info-container {
+  width: 100%;
+  height: 48%;
+  background-color: white;
+}
+
+.bidding-container {
+  margin-top: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+}
+
+.bid-error-label {
+  font-size: 15px;
+  color: red;
+  margin-top: 50px;
+}
+
+.bidding-form {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.bid-input-field {
+  width: 214px;
+  height: 40px;
+  font-size: 28px;
+  color: #636363;
+}
+
+.bid-button {
+  width: 220px;
+  height: 40px;
+  font-size: large;
+  margin-top: 1px;
+  border-radius: 1px;
+  color: white;
+  background-color: #01c64c;
+}
+
+.category-image {
+  height: 250px;
+  width: 250px;
+}

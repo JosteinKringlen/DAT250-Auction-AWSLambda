@@ -30,7 +30,7 @@
                 <p>Name:</p><input class="userInput" name="auction_name">
             </div>
             <div class="input">
-                <p>Price:</p><input class="userInput" name="auction_price">
+                <p>Price:</p><input type="number" class="userInput" name="auction_price">
             </div>
             <div class="input">
                 <p>Description:</p><input class="userInput" name="auction_description">
@@ -39,7 +39,7 @@
                 <p>Category:</p><input class="userInput" name="auction_category">
             </div>
             <div class="input">
-                <p>Duration in days:</p><input class="userInput" name="auction_duration">
+                <p>Duration in days:</p><input type="number" class="userInput" name="auction_duration">
             </div>
             <input type="button" class="buttons" value="Post auction" onclick="makeAuction(this.form.auction_name.value,this.form.auction_price.value,this.form.auction_description.value,this.form.auction_category.value,this.form.auction_duration.value)">
         </form>
