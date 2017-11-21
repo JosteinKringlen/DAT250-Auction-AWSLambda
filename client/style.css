@@ -1,3 +1,9 @@
+@import 'header.css';
+
+body {
+  background-color: #ededed;
+}
+
 .outer-container {
   display: flex;
   justify-content: center;
@@ -7,10 +13,10 @@
 .container {
   width: 75%;
   height: 100%;
-  background-color: #ededed;
   display: flex;
   padding-left: 2.5vw;
   padding-right: 2.5vw;
+  background-color: white;
 }
 
 .auction-list {
@@ -66,26 +72,4 @@
   height: 75px;
   width: 200px;
   margin-left: auto;
-}
-
-.header{
-  display: flex;
-  margin-bottom: 5vh;
-  margin-left: 10vw;
-  margin-right: 10vw;
-  justify-content: space-between;
-}
-
-.buttons{
-  color: white;
-  background-color: forestgreen;
-  font-size: 20px;
-  border-radius: 1px;
-}
-
-.input{
-  display: flex;
-  flex-direction: row;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
