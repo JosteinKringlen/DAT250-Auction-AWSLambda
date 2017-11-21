@@ -75,14 +75,15 @@ functions:
     handler: api/sellers/bids.bids
     events:
       - http:
-          path: getBids
+          path: getBids/{seller_id}
           method: get
   editSeller:
     handler: api/sellers/edit.edit
     events:
       - http:
-          path: editSeller
+          path: editSeller/{seller_id}
           method: post
+          cors: true
   deleteSeller:
     handler: api/sellers/delete.delete
     events:
