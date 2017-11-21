@@ -85,3 +85,9 @@ function makeUser(name,address,email,phone) {
     console.log(name + address + email + phone);
 
 }
+
+function makeAuction(name, seller, price, description, category, duration){
+
+    console.log(name + seller + price + description, category, duration);
+
+}
