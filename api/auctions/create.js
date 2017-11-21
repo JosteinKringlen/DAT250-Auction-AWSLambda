@@ -19,9 +19,9 @@ module.exports.create = (event, context, callback) => {
     const duration_days = bodyData.duration_days;
 
     if(typeof seller_id !== 'string' || typeof product_name !== 'string'
-    || typeof description !== 'string'|| typeof min_price !== 'number'
+    || typeof description !== 'string'|| typeof min_price !== 'string'
     || typeof category !== 'string' || typeof image !== 'string'
-    || typeof duration_days !== 'number'){
+    || typeof duration_days !== 'string'){
         callback(null, {
             statusCode: 400,
             body: 'Bad request. Invalid value for one of the inputs',
