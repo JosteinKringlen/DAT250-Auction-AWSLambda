@@ -21,7 +21,10 @@ module.exports.create = (event, context, callback) => {
         console.error('Bad stuff');
         callback(null, {
             statusCode: 400,
-            headers: {'Content-Type': 'text/plain'},
+            headers: {
+                "Access-Control-Allow-Origin" : "*",
+                'Content-Type': 'text/plain'
+            },
             body: 'Bad stuff happened. Sry',
         });
     }
@@ -30,6 +33,9 @@ module.exports.create = (event, context, callback) => {
         .then(res => {
             callback(null, {
                 statusCode: 200,
+                headers: {
+                    "Access-Control-Allow-Origin" : "*"
+                },
                 body: JSON.stringify({
                     message: 'Good stuff',
                     title: res.title
@@ -40,6 +46,9 @@ module.exports.create = (event, context, callback) => {
             console.log(err);
             callback(null, {
                 statusCode: 500,
+                headers: {
+                    "Access-Control-Allow-Origin" : "*"
+                },
                 body: JSON.stringify({
                     message: 'Bad stuff when creating user'
                 })

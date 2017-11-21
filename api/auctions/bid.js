@@ -42,6 +42,9 @@ module.exports.bid = (event, context, callback) => {
    dynamoDb.update(params).promise().then(res => {
         const result = {
             statusCode: 200,
+            headers: {
+                "Access-Control-Allow-Origin" : "*"
+            },
             body: JSON.stringify(res.Item),
         };
         callback(null, result);

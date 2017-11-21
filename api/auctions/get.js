@@ -23,6 +23,9 @@ module.exports.get = (event, context, callback) => {
             console.log('Good stuff');
             return callback(null, {
                 statusCode: 200,
+                headers: {
+                    "Access-Control-Allow-Origin" : "*"
+                },
                 body: JSON.stringify({
                     auctions: data.Items
                 })
