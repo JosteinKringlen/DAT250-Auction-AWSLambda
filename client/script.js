@@ -1,6 +1,10 @@
 
-function createNode(element) {
-  return document.createElement(element);
+function createNode(element, className) {
+  var el = document.createElement(element);
+  if (className) {
+    el.className = className;
+  }
+  return el;
 }
 
 function append(parent, el) {
@@ -14,8 +18,8 @@ function createListElements() {
     .then(function(data) {
       let auctions = data.auctions
       return auctions.map(auction => {
-        let listElement = createNode('li'),
-            nameLabel = createNode('p');
+        let listElement = createNode('div', 'auction-list-element'),
+            nameLabel = createNode('p', '');
         nameLabel.innerHTML = auction.product_name;
         append(listElement, nameLabel);
         append(auction_list, listElement);
