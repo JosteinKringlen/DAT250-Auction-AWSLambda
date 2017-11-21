@@ -15,6 +15,8 @@ function getCurrentBidFromAuction(auction) {
       currentBid = Math.max(currentBid, auction.bids[i].newBid);
     }
     return currentBid;
+  } else if (auction.min_price) {
+    return auction.min_price;
   }
   return -1;
 }

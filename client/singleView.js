@@ -10,6 +10,52 @@ function append(parent, el) {
   return parent.appendChild(el);
 }
 
+function setBidError(err) {
+  document.getElementById("bid-error-label").innerHTML = err;
+}
+
+const submitBid = () => {
+  let auction_id = new URL(window.location.href).searchParams.get("id");
+  let bidSize = document.getElementById('bid-input').value;
+  if (isNaN(bidSize)) {
+    setBidError("Please enter a numeric value")
+    return;
+  }
+
+  const url = "https://q0jzfqkffi.execute-api.eu-west-2.amazonaws.com/dev/postBid/" + auction_id;
+
+  let data = {
+    new_bid: bidSize,
+    bidder_id: "d2235910-ced4-11e7-882f-75e15f1a770d" //hardcoded for testing
+  }
+
+  let fetchData = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  fetch(url, fetchData)
+    .then(res => {
+      console.log(res.status);
+      if (res.status == 200) {
+        document.getElementById('main-bid-label').innerHTML = "$" + bidSize
+        document.getElementById('side-bid-label').innerHTML = "$" + bidSize
+        document.getElementById('bid-input').value = ""
+        alert("Bid placed!")
+        setBidError("");
+      } else {
+        setBidError("Not a valid bid, bid to small");
+        alert("Not a valid bid")
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    });
+}
+
 function createInfoContainer(auction) {
   let infoContainer = createNode('div', 'info-container')
       nameLabel = createNode('p', 'name-label'),
@@ -25,6 +71,7 @@ function createInfoContainer(auction) {
   descriptionLabel.innerHTML = auction.description;
   currentBidHeader.innerHTML = auction.bids.length !== 0 ? "Current bid" : "Minimum bid";
   currentBidLabel.innerHTML = "$" + getCurrentBidFromAuction(auction);
+  currentBidLabel.id = "side-bid-label";
 
   append(infoContainer, nameLabel);
   append(infoContainer, categoryLabel);
@@ -41,15 +88,21 @@ function createBiddingContainer(auction) {
       currentBidLabel = createNode('p', 'bidding-label'),
       timeRemainingLabel = createNode('p', 'time-remaining-label'),
       biddingForm = createNode('div', 'bidding-form'),
+      bidErrorLabel = createNode('div', 'bid-error-label'),
       bidInputField = createNode('input', 'bid-input-field'),
       bidButton = createNode('button', 'bid-button');
 
   bidHeader.innerHTML = auction.bids.length !== 0 ? "Current bid" : "Minimum bid";
   currentBidLabel.innerHTML = "$" + getCurrentBidFromAuction(auction);
+  currentBidLabel.id = "main-bid-label";
   timeRemainingLabel.innerHTML = getTimeRemainingFromAuction(auction);
-  bidInputField.type = 'text';
+  bidInputField.type = 'number';
+  bidInputField.id = 'bid-input';
+  bidErrorLabel.id = 'bid-error-label';
   bidButton.innerHTML = 'Place bid';
+  bidButton.onclick = submitBid;
 
+  append(biddingForm, bidErrorLabel);
   append(biddingForm, bidInputField);
   append(biddingForm, bidButton);
   append(container, bidHeader);

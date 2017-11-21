@@ -135,6 +135,12 @@ body {
   padding-left: 10%;
 }
 
+.bid-error-label {
+  font-size: 15px;
+  color: red;
+  margin-top: 50px;
+}
+
 .bidding-form {
   display: flex;
   flex-direction: column;
@@ -144,7 +150,6 @@ body {
 .bid-input-field {
   width: 214px;
   height: 40px;
-  margin-top: 50px;
   font-size: 28px;
   color: #636363;
 }
