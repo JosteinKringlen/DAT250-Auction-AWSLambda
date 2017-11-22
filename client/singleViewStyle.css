@@ -27,7 +27,8 @@ body {
   flex-direction: column;
   background-color: white;
   padding-top: 50px;
-  padding-left: 20px;
+  padding-left: 50px;
+  margin-left: -30px;
 }
 
 .info-container {
@@ -80,11 +81,12 @@ body {
 }
 
 .sidebar-container {
-  width: 30%;
+  width: 32%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-right: -30px;
 }
 
 .seller-info-container {
