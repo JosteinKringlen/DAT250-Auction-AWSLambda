@@ -16,10 +16,10 @@
         </div>
         <div class="button">
             <form action="makeUser.html">
-                <input class="buttons" type="submit" value="Make user" />
+                <input class="buttons make-user-button" type="submit" value="New user" />
             </form>
             <form action="makeAuction.html">
-                <input class="buttons" type="submit" value="Make auction" />
+                <input class="buttons" type="submit" value="New auction" />
             </form>
         </div>
     </div>
@@ -38,7 +38,7 @@
                 <div class="input">
                     <p>Phone number:</p><input type="number" class="userInput" name="user_phone">
                 </div>
-                <input type="button" class="buttons" value="Make user" onclick="makeUser(this.form.user_name.value,this.form.user_address.value,this.form.user_email.value,this.form.user_phone.value)">
+                <input type="button" class="buttons submit-user-button" value="Create user" onclick="makeUser(this.form.user_name.value,this.form.user_address.value,this.form.user_email.value,this.form.user_phone.value)">
             </form>
         </div>
     </div>

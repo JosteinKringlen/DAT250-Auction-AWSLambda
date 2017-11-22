@@ -60,9 +60,7 @@ function createListElements() {
 }
 
 function makeUser(name,address,email,phone) {
-
     const url = "https://q0jzfqkffi.execute-api.eu-west-2.amazonaws.com/dev/createSeller";
-
     let data = {
         seller_name:name,
         seller_email:email,
@@ -78,13 +76,9 @@ function makeUser(name,address,email,phone) {
         }
     };
 
-    fetch(url,fetchData)
-        .then(res => {
-            console.log(res);
-        });
-
+    fetch(url,fetchData).then(res => { console.log(res); });
     alert('User added');
-
+    window.location.href = "index.html"
 }
 
 function makeAuction(name, price, description, category, duration){
@@ -98,9 +92,10 @@ function makeAuction(name, price, description, category, duration){
         description:description,
         category:category,
         image:'https://i.imgur.com/p3fWg61.png',
-        duration_days:duration
-
+        duration_days:parseInt(duration)
     };
+
+    console.log(duration)
 
     let fetchData = {
         method: 'POST',
@@ -116,5 +111,5 @@ function makeAuction(name, price, description, category, duration){
         });
 
     alert('Auction added');
-
+    window.location.href = "index.html"
 }

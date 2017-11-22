@@ -16,10 +16,10 @@
     </div>
     <div class="button">
         <form action="makeUser.html">
-            <input class="buttons" type="submit" value="Make user" />
+            <input class="buttons make-user-button" type="submit" value="Create user" />
         </form>
         <form action="makeAuction.html">
-            <input class="buttons" type="submit" value="Make auction" />
+            <input class="buttons" type="submit" value="Create auction" />
         </form>
     </div>
 </div>
@@ -41,7 +41,7 @@
             <div class="input">
                 <p>Duration in days:</p><input type="number" class="userInput" name="auction_duration">
             </div>
-            <input type="button" class="buttons" value="Post auction" onclick="makeAuction(this.form.auction_name.value,this.form.auction_price.value,this.form.auction_description.value,this.form.auction_category.value,this.form.auction_duration.value)">
+            <input type="button" class="buttons submit-user-button" value="Post auction" onclick="makeAuction(this.form.auction_name.value,this.form.auction_price.value,this.form.auction_description.value,this.form.auction_category.value,this.form.auction_duration.value)">
         </form>
     </div>
 </div>
