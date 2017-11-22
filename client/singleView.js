@@ -43,6 +43,8 @@ const submitBid = () => {
       if (res.status == 200) {
         document.getElementById('main-bid-label').innerHTML = "$" + bidSize
         document.getElementById('side-bid-label').innerHTML = "$" + bidSize
+        document.getElementById('main-bid-header').innerHTML = "Current bid";
+        document.getElementById('side-bid-header').innerHTML = "Current bid";
         document.getElementById('bid-input').value = ""
         alert("Bid placed!")
         setBidError("");
@@ -72,6 +74,7 @@ function createInfoContainer(auction) {
   currentBidHeader.innerHTML = auction.bids.length !== 0 ? "Current bid" : "Minimum bid";
   currentBidLabel.innerHTML = "$" + getCurrentBidFromAuction(auction);
   currentBidLabel.id = "side-bid-label";
+  currentBidHeader.id = "side-bid-header";
 
   append(infoContainer, nameLabel);
   append(infoContainer, categoryLabel);
@@ -95,6 +98,7 @@ function createBiddingContainer(auction) {
   bidHeader.innerHTML = auction.bids.length !== 0 ? "Current bid" : "Minimum bid";
   currentBidLabel.innerHTML = "$" + getCurrentBidFromAuction(auction);
   currentBidLabel.id = "main-bid-label";
+  bidHeader.id = "main-bid-header";
   timeRemainingLabel.innerHTML = getTimeRemainingFromAuction(auction);
   bidInputField.type = 'number';
   bidInputField.id = 'bid-input';

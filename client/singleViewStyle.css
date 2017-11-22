@@ -86,7 +86,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: -30px;
+  margin-right: -30px; /* New Badge Unlocked: Hackerman */
 }
 
 .seller-info-container {
