@@ -14,20 +14,20 @@ module.exports.get = (event, context, callback) => {
         ProjectionExpression: "auction_id, product_name, description, unix_end_time, created_at, category, image, seller_id, bids, min_price"
     };
 
-    console.log('Getting the stuff');
     const onScan = (err, data) => {
         if (err) {
-            console.log('Bad stuff: ', JSON.stringify(err, null, 2));
             callback(err);
         } else {
-            console.log('Good stuff');
+            var date = new Date();
+            var activeAuctions = data.Items.filter(auction => auction.unix_end_time > date.getTime())
+            activeAuctions.sort((a,b) => a.unix_end_time - b.unix_end_time);
             return callback(null, {
                 statusCode: 200,
                 headers: {
                     "Access-Control-Allow-Origin" : "*"
                 },
                 body: JSON.stringify({
-                    auctions: data.Items
+                    auctions: activeAuctions
                 })
             })
         }

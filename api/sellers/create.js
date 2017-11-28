@@ -15,7 +15,6 @@ module.exports.create = (event, context, callback) => {
     const seller_address = bodyData.seller_address;
     const seller_phone = bodyData.seller_phone;
 
-
     if(typeof seller_name !== 'string' || typeof seller_email !== 'string' || typeof seller_address !== 'string'
         || typeof seller_phone !== 'string' ){
         console.error('Bad stuff');
