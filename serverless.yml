@@ -1,9 +1,8 @@
 
 
 #GENERAL SERVICE INFO
-#
-#
 service: DAT250-Auction
+
 provider:
   name: aws
   runtime: nodejs6.10
@@ -25,10 +24,8 @@ provider:
 
 # LAMBDA FUNCTIONS
 functions:
-  #Auction
   createAuction:
     handler: api/auctions/create.create
-    memorySize: 128
     events:
       - http:
           path: createAuction
